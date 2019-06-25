@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="Symbol">
+  <p>{{ message }}</p>
+</div>
+<div id="user-tweets">
+  {% for data in ticker_data %}
+  <span class="stack">{{ data.datetime, data.open_, data.high, data.low, data.close, data.volume }}</span>
+  {% endfor %}
+</div>
+{% endblock %}

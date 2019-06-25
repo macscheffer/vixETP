@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>VIX ETP Dashboard</title>
+        <link rel="stylesheet" href="https://unpkg.com/picnic"/>
+    </head>
+
+
+    <nav>
+        <a href="/" class="brand"><span>VIX ETP Dashboard</span></a>
+              <!-- responsive-->
+        <input id="bmenub" type="checkbox" class="show">
+        <label for="bmenub" class="burger pseudo button">Menu</label>
+            <input id="bmenub" type="checkbox"
+            class="show">
+            <label for="bmenub" class="burger pseudo button">Menu</label>
+            <div class="menu">
+                <a action="/refresh" href="/update" class="button success">Update Data</a>
+              </div>
+    </nav>
+        <article class="flex two" style="padding: 3em 4em;">
+        {% block content %}
+        <div>
+            <h1>Current Tickers</h1>
+            {% for instance in symbols %}
+            <a href="/symbol/{{ instance.ticker }}"><span class="stack">{{ instance.ticker }}</span></a>
+            {% endfor %}
+            <form action="/symbol/<ticker_to_add>" method="post">
+                <input type="text" name="ticker_to_add" placeholder="Add Symbol">
+                <input type="submit" value="symbol" class="button success">
+            </form>
+        </div>
+        {% endblock %}
+        <div>
+        <h1>Backtest a ticker!</h1>
+        <form action="/backtest" method="post">
+            <select name="predict_this_symbol">
+                {% for instance in symbols %}
+                <option value="{{ instance.ticker }}">{{ instance.ticker }} </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Backtest!" class="button info">
+        </form>
+    </div>
+    </article>
+</html>
